@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JscriptInAssiTwo</title>
+    <style type="text/css">
+        body{
+            margin: 5px; border: 0px;
+            background-color: coral;
+            font-family: Lucida Console;
+        }
+        #weight{
+            border:5px solid antiquewhite;
+	        padding:100px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            box-shadow: 8px 8px 4px white;
+        }
+        #maxMin{
+            border:5px solid antiquewhite;
+	        padding:70px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            box-shadow: 8px 8px 4px white;
+        }
+        #magic{
+            border:5px solid antiquewhite;
+	        padding:20px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            box-shadow: 8px 8px 4px white;
+        }
+    </style>
+    </head>
+<body>
+    <div id="weight"> 
+      <h2>Convert:</h2>
+      <input id="input" type="text" onkeyup="convert()">
+      <select id="convert" onchange="convert()">
+       <option value="lb to Kg">lb to kg</option>
+       <option value="kg to lb">kg to lb</option>
+      </select>
+      <!--<button onclick="convert()" >Calculate</button>-->
+      <span id="answer"></span>
+     
+    <script type="text/javascript">
+	function convert() {
+       var input = document.getElementById("input");
+       value = parseInt(input.value);
+       if( isNaN(value) ){  
+       value=0;
+       }
+       unit="";
+        
+       var conversion = document.getElementById("convert");
+       if (conversion.value == "kg to lb") {
+          value *= 2.2046;
+          unit =" pounds";
+       } else {
+          value *= 0.4536;
+          unit = " kilograms";
+       }
+       
+       var answer = document.getElementById("answer");
+       answer.innerHTML = value+unit;
+
+       }
+    </script>
+    </div>
+   
+    <div id="maxMin">
+        <h2 style="text-align: center">Manipulation of a number series</h2>
+
+        <table width="50%" border="0" align="center">
+      <tr>
+        <td width="13%">Input Series of Number:</td>
+        <td width="29%"><input name="box1" type="text" id="box1" onkeyup="calculate()" /></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Max :</td>
+        <td><div id="max"> </div></td>
+      </tr>
+      <tr>
+        <td>Min :</td>
+        <td><div id="min"> </div></td>
+      </tr>
+      <tr>
+        <td>Sum  :</td>
+        <td><div id="sum"> </div></td>
+      </tr>
+      <tr>
+        <td>Average :</td>
+        <td><div id="avg"> </div></td>
+      </tr>
+      <tr>
+        <td>Reverse Order :</td>
+        <td><div id="reverse"> </div></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td></td>
+      </tr>
+    </table>
+       
+        
+    <!-- <button onclick="calculate()" style="margin-left: 300px">Calculate</button>  -->
+    <script type="text/javascript">
+     function calculate() {
+      var values = document.getElementById('box1').value.split(/,| /);
+      values=values.filter(Boolean);
+      var sum = values.reduce(function(a, b) { return parseInt(a) + parseInt(b); });
+      document.querySelector('#max').innerHTML = values.max();
+      document.querySelector('#min').innerHTML = values.min();
+      document.querySelector('#sum').innerHTML = sum;
+      document.querySelector('#avg').innerHTML = sum / values.length;
+      document.querySelector('#reverse').innerHTML = values.reverse().join(',');
+     }
+
+      Array.prototype.max = function() {
+      return Math.max.apply(null, this);
+     }
+
+      Array.prototype.min = function() {
+      return Math.min.apply(null, this);
+     }
+	</script>
+    </div>
+    
+    <div id="magic">
+    <h2>Magic!</h2>
+    <textarea id="Magic!" rows="17" cols="70">Sample Item 
+ Aample Item    
+Sample Item    
+  Sample Item 
+ 
+My Sample Item 
+Bample Item 
+
+
+Cample Item </textarea>
+		<br>
+		<br>
+		<button value="clear" onclick="clearIt()">Clear It</button>
+		<button value="capitalize" onclick="capitalize()">Capitalize</button>
+		<button value="sort" onclick="sort()">Sort</button>
+		<button value="reverse" onclick="reverse()">Reverse</button>
+		<button value="stripBlank" onclick="strip()">Strip Blank</button>
+		<button value="addNumbers" onclick="addNum()">Add Numbers</button>
+		<button value="shuffle" onclick="shuffle()">Shuffle</button>
+    
+    <script type="text/javascript">
+    function clearIt() {
+        document.getElementById("Magic!").value = "";
+     }
+            
+    function capitalize(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+
+        if(!hasLowerCase(textArea)){document.getElementById("Magic!").value=textArea.toLowerCase();}
+
+        if(hasLowerCase(textArea)){
+        document.getElementById("Magic!").value=textArea.toUpperCase();}
+      /*  for(var k=0;k<arrayOfLines.length;k++){
+        var eachLine= arrayOfLines[k];
+        var words = eachLine.split(" "); 
+        currWord="";
+        for (var i=0;i<words.length;i++){
+        currWord = words[i]; 
+        currNW="";
+        for(var j=0;j<currWord.length;j++){
+         currNW=currNW+""+currWord.charAt(j).toUpperCase(); 
+        }
+        words[i] = currNW; 
+        }
+        var x=""; 
+        for(var i=0;i<words.length;i++){
+         if(i==0){x=words[i];}
+         else{
+          x=x+" "+words[i];
+         }
+        }
+        arrayOfLines[k]=x;
+        }
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x;}*/          
+     }
+            
+    function hasLowerCase(str) {
+        return (/[a-z]/.test(str));
+    }
+            
+    function sort(){
+        strip();
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+        arrayOfLines.sort();
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x; 
+    }
+            
+    function reverse(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n");
+        
+        //To avoid complicacy trimming a sentence first
+        for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         eachLine=eachLine.trim();
+         arrayOfLines[k]=eachLine;    
+        }
+        //Reverse
+        for(var k=0;k<arrayOfLines.length;k++){    
+        var eachLine= arrayOfLines[k];
+        var words = eachLine.split(" ");
+        var x=""; 
+        for(var i=0;i<words.length;i++){
+        var temp = words[i].split("");     
+        temp.reverse();
+        for(var j=0;j<temp.length;j++){
+            if(j==0){x=temp[j];} else{x=x+""+temp[j];}
+        }words[i]=x;
+        }words.reverse();
+         arrayOfLines[k]=words.join(" ");   
+        }
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x;
+    }    
+            
+    function strip(){
+        var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n"); 
+        for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         eachLine=eachLine.trim();
+         arrayOfLines[k]=eachLine;    
+        }
+        arrayOfLines = arrayOfLines.filter(Boolean);
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x;       
+    }
+        
+    function addNum(){
+       var textArea= document.getElementById("Magic!").value;
+        var arrayOfLines = textArea.split("\n"); 
+        for(var k=0,l=0;k<arrayOfLines.length;k++){
+          var eachLine= arrayOfLines[k]; 
+          if(/[^\s]/.test(eachLine)){
+          eachLine=(l+1)+" "+eachLine;l++;
+          arrayOfLines[k]=eachLine; 
+         }
+        }
+        var x = arrayOfLines.join("\n");
+        document.getElementById("Magic!").value=x; 
+    }
+        
+    function shuffle(){
+    var textArea= document.getElementById("Magic!").value;
+    var arrayOfLines = textArea.split("\n"); 
+    for(var k=0;k<arrayOfLines.length;k++){    
+         var eachLine= arrayOfLines[k];     
+         if(/[^\S]/.test(eachLine)){
+             eachLine=eachLine.trim();
+             arrayOfLines[k]=eachLine;
+         }    
+        }    
+    arrayOfLines = arrayOfLines.filter(Boolean);
+        
+    let ctr = arrayOfLines.length;
+    let temp; let index;
+    while (ctr > 0) {
+     index = Math.floor(Math.random() * ctr);
+     ctr--;
+     temp = arrayOfLines[ctr];
+     arrayOfLines[ctr] = arrayOfLines[index];
+     arrayOfLines[index] = temp;
+    }
+    var x = arrayOfLines.join("\n");
+    document.getElementById("Magic!").value=x;
+    }    
+    </script>   
+        
+    </div>
+</body>
+</html>
